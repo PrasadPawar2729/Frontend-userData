@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../Styles/UserData.css"; 
+import "../Styles/UserData.css";
 
 const UserData = () => {
   const [data, setData] = useState([]);
@@ -8,26 +8,35 @@ const UserData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  async function fetchData() {
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      if (!res.ok) throw new Error("Failed to fetch data");
-      const result = await res.json();
-      setData(result);
-      setFilteredData(result);
-    } catch (err) {
-      setError(err.message);
-    } 
-  }
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!res.ok) throw new Error("Failed to fetch data");
+
+        const result = await res.json();
+        setData(result);
+        setFilteredData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false); // Ensure loading state is updated
+      }
+    };
+
     fetchData();
   }, []);
 
   const handleChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setSearch(searchValue);
-    setFilteredData(data.filter(user => user.name.toLowerCase().includes(searchValue)));
+
+    if (!searchValue) {
+      setFilteredData(data);
+    } else {
+      setFilteredData(data.filter(user => user.name.toLowerCase().includes(searchValue)));
+    }
   };
 
   if (loading) return <div className="loading">Loading...</div>;
