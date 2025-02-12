@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "../Styles/UserData.css";
 
 const UserData = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,7 @@ const UserData = () => {
       } catch (err) {
         setError(err.message);
       } finally {
-        setLoading(false); // Ensure loading state is updated
+        setLoading(false);
       }
     };
 
@@ -35,7 +35,9 @@ const UserData = () => {
     if (!searchValue) {
       setFilteredData(data);
     } else {
-      setFilteredData(data.filter(user => user.name.toLowerCase().includes(searchValue)));
+      setFilteredData(
+        data.filter((user) => user.name.toLowerCase().includes(searchValue))
+      );
     }
   };
 
@@ -44,20 +46,27 @@ const UserData = () => {
 
   return (
     <div className="user-data-container">
+      <h2>User Directory</h2>
       <input
-        type='text'
+        type="text"
         value={search}
-        placeholder='Search by name'
+        placeholder="🔍 Search by name..."
         onChange={handleChange}
         className="search-input"
       />
-      <ul className="user-list">
+      <div className="user-grid">
         {filteredData.map((user) => (
-          <li key={user.id} className="user-item">
-            <strong>{user.name}</strong> - {user.email}
-          </li>
+          <div key={user.id} className="user-card">
+            <div className="user-avatar">
+              <span>{user.name.charAt(0)}</span>
+            </div>
+            <div className="user-info">
+              <h3>{user.name}</h3>
+              <p>{user.email}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

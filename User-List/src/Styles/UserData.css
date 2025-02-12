@@ -1,33 +1,86 @@
+/* Global Styling */
 .user-data-container {
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
     text-align: center;
 }
 
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Search Input */
 .search-input {
-    padding: 8px;
-    margin: 10px 0;
     width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.user-list {
-    list-style: none;
-    padding: 0;
-}
-
-.user-item {
     padding: 10px;
-    margin: 5px 0;
-    background-color: #f9f9f9;
-    border-radius: 5px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    text-align: center;
+    outline: none;
+    transition: 0.3s ease-in-out;
 }
 
-.loading {
-    color: blue;
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3);
 }
 
+/* User Grid */
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* User Card */
+.user-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.user-card:hover {
+    transform: scale(1.05);
+}
+
+/* Avatar */
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    background: #007bff;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+/* User Info */
+.user-info h3 {
+    margin: 0;
+    color: #333;
+}
+
+.user-info p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+/* Loading & Error States */
+.loading,
 .error {
+    font-size: 18px;
     color: red;
+    margin-top: 20px;
 }
