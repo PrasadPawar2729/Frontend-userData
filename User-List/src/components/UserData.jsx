@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../Styles/UserData.css"; // Assuming you create a CSS file for styling
+import "../Styles/UserData.css"; 
 
 const UserData = () => {
   const [data, setData] = useState([]);
